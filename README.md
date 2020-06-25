@@ -1,10 +1,36 @@
 # !!! WORK IN PROGRESS
 
+![architecture](doc/source/images/architecture.png)
+
 ## Flow
+
+1. Full data set is loaded into Cognos Analytics.
+1. User runs Jupyter notebook in Watson Studio
+1. Data from Cognos Analytics is loaded into Jupyter notebook.
+1. Jupyter notebook is run to create a refined data set that is pushed back into Cognos Analytics.
+1. User runs Cognos Analytics to visualize new data set.
 
 ## Included Components
 
+* [Cognos Analytics](https://www.ibm.com/products/cognos-analytics): A business intelligence solution that empowers users with AI-infused self-service capabilities that accelerate data preparation, analysis, and repot creation.
+* [IBM Watson Studio](https://dataplatform.cloud.ibm.com): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
+* [IBM Cloud Object Storage](https://cloud.ibm.com/catalog/services/cloud-object-storage): An IBM Cloud service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
+* [Jupyter Notebooks](https://jupyter.org/): An open-source web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+* [pandas](https://pandas.pydata.org/): A Python library providing high-performance, easy-to-use data structures.
+
 ## Steps
+
+1. [Clone the repo](#1-clone-the-repo)
+1. [Upload data file into Cognos Analytics](#2-upload-data-file-into-cognos-analytics)
+1. [Create a new Watson Studio project](#3-create-a-new-watson-studio-project)
+1. [Create a Cognos Analytics connection in Watson Studio](#4-create-a-cognos-analytics-connection-in-watson-studio)
+1. [Add Cognos Analytics data asset to Watson Studio project](#5-add-cognos-analytics-data-asset-to-watson-studio-project)
+1. [Create data access token](#6-create-data-access-token)
+1. [Create the notebook in Watson Studio](#7-create-the-notebook-in-watson-studio)
+1. [Run the notebook](#8-run-the-notebook)
+1. [Refine the data](#9-refine-the-data)
+1. [Write out data using Cognos Analytics connection](#10-write-out-data-using-cognos-analytics-connection)
+1. [Visualize the data in Cognos Analytics](#11-visualize-the-data-in-cognos-analytics)
 
 ## 1. Clone the repo
 
@@ -171,47 +197,52 @@ There are several ways to execute the code cells in your notebook:
 
 ## 9. Refine the data
 
-SNAP refers to the Supplemental Nutrition Assistance Program that was formerly known as food stamps.
+The notebook analyzes food insecurity data, and attempts to correlate multiple variables that include public heath, food scarcity, and access to food programs.
 
-WIC is the Woman, Infant, Children program that provides nutrious foods for expecting mothers, infants and children.
+General definitions:
 
-* State
-* County
-* PCT_REDUCED_LUNCH10 - Percentage of reduced lunches in schools
-* PCT_DIABETES_ADULTS10 - Percentage of adult population with diabetes
-* PCT_OBESE_ADULTS10 - Percentage of adult population that is obese
-* FOODINSEC_10_12
-* PCT_OBESE_CHILD11 - Percentage of children in the population that is obese
-* PCT_LACCESS_POP10
-* PCT_LACCESS_CHILD10
-* PCT_LACCESS_SENIORS10
-* SNAP_PART_RATE10 - SNAP Participation Rate
-* PCT_LOCLFARM07
-* FMRKT13
-* PCT_FMRKT_SNAP13
-* PCT_FMRKT_WIC13
-* FMRKT_FRVEG13
-* PCT_FRMKT_FRVEG13
-* PCT_FRMKT_ANMLPROD13
-* FOODHUB12 - Food hubs connect the dots between producers and cosumers of food in local and regional food systems. Currently there are 236 food hubs in the U.S.
-* FARM_TO_SCHOOL
-* SODATAX_STORES11
-* State_y
-* GROC12
-* SNAPS12
-* WICS12
-* PCT_NHWHITE10 - Percentage of the poluation that is white
-* PCT_NHBLACK10 - Percentage of the poluation that is black
-* PCT_HISP10 - Percentage of the poluation that is hispanic
-* PCT_NHASIAN10 - Percentage of the poluation that is asian
-* PCT_65OLDER10 - Percentage of the poluation that is 65 or older
-* PCT_18YOUNGER10 - Percentage of the poluation that is 18 or younger
-* POVRATE10 -
-* CHILDPOVRATE10
+* **Food Insecurity** is a measure of the availability of food and an individuals' ability to access it.
+* **SNAP** refers to the Supplemental Nutrition Assistance Program that was formerly known as food stamps.
+* **WIC** is the Woman, Infant, Children program that provides nutrious foods for expecting mothers, infants and children.
+
+Here are a sampling of the variables used in the notebook and their definitions:
+
+* **PCT_REDUCED_LUNCH10** - Percentage of reduced lunches in schools
+* **PCT_DIABETES_ADULTS10** - Percentage of adult population with diabetes
+* **PCT_OBESE_ADULTS10** - Percentage of adult population that is obese
+* **FOODINSEC_10_12** - Amount of food insecurity
+* **PCT_OBESE_CHILD11** - Percentage of children in the population that is obese
+* **PCT_LACCESS_POP10** - Percentage of the population lacking access to food
+* **PCT_LACCESS_CHILD10** - Percentage of children lacking access to food
+* **PCT_LACCESS_SENIORS10** - Percentage of senior citizens lacking access to food
+* **SNAP_PART_RATE10** - SNAP Participation Rate
+* **PCT_LOCLFARM07**
+* **FMRKT13** - Number of food markets
+* **PCT_FMRKT_SNAP13** - Number of food markets providing SNAP assistance
+* **PCT_FMRKT_WIC13** - Number of food markets providing WIC assistance
+* **FMRKT_FRVEG13** - Food markets with vegetables
+* **PCT_FRMKT_FRVEG13** - Percentage of markets that offer vegatables
+* **PCT_FRMKT_ANMLPROD13** - Percentage of markets that offer animal products
+* **FOODHUB12** - Food hubs connect the dots between producers and cosumers of food in local and regional food systems. Currently there are 236 food hubs in the U.S.
+* **FARM_TO_SCHOOL**
+* **SODATAX_STORES11**
+* **GROC12**
+* **SNAPS12**
+* **WICS12**
+* **PCT_NHWHITE10** - Percentage of the poluation that is white
+* **PCT_NHBLACK10** - Percentage of the poluation that is black
+* **PCT_HISP10** - Percentage of the poluation that is hispanic
+* **PCT_NHASIAN10** - Percentage of the poluation that is asian
+* **PCT_65OLDER10** - Percentage of the poluation that is 65 or older
+* **PCT_18YOUNGER10** - Percentage of the poluation that is 18 or younger
+* **POVRATE10** - Poverty Rate
+* **CHILDPOVRATE10** - Chile Poverty Rate
+
+Initially, the data is very large and contains irrelevant data. Through a series of explorations, the DataFrame is reduced by eliminating unrelated variables and data where the vales are 0 or undefined.
 
 ## 10. Write out data using Cognos Analytics connection
 
-Once we have refined our DataFrame, we can use the connection to write the data back out so that we can use it Cognos Analytics.
+Once we have refined our DataFrame, we can use the connection to write the data back out so that we can visualize it using Cognos Analytics.
 
 In this example, we are writing it out to a file named `focused_data.csv`.
 
