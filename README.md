@@ -27,10 +27,11 @@
 1. [Add Cognos Analytics data asset to Watson Studio project](#5-add-cognos-analytics-data-asset-to-watson-studio-project)
 1. [Create data access token](#6-create-data-access-token)
 1. [Create the notebook in Watson Studio](#7-create-the-notebook-in-watson-studio)
-1. [Run the notebook](#8-run-the-notebook)
-1. [Refine the data](#9-refine-the-data)
-1. [Write out data using Cognos Analytics connection](#10-write-out-data-using-cognos-analytics-connection)
-1. [Visualize the data in Cognos Analytics](#11-visualize-the-data-in-cognos-analytics)
+1. [Add data to the notebook](#8-add-data-to-the-notebook)
+1. [Run the notebook](#9-run-the-notebook)
+1. [Refine the data](#10-refine-the-data)
+1. [Write out data using Cognos Analytics connection](#11-write-out-data-using-cognos-analytics-connection)
+1. [Visualize the data in Cognos Analytics](#12-visualize-the-data-in-cognos-analytics)
 
 ## 1. Clone the repo
 
@@ -146,9 +147,9 @@ Upon a successful project creation, you are taken to the project Overview tab. T
 
   > **TIP:** Your notebook will appear in the `Notebooks` section of the `Assets` tab.
 
-### 7. Add data to the notebook
+### 8. Add data to the notebook
 
-* After creation, the notebook will automatically be loaded into the nodebook runtime environment. You can re-run the notebook at any time by clicking on the `pencil` edit icon displayed in right-hand column of the notebook row.
+* After creation, the notebook will automatically be loaded into the notebook runtime environment. You can re-run the notebook at any time by clicking on the `pencil` edit icon displayed in right-hand column of the notebook row.
 
   ![start-notebook](doc/source/images/start-notebook.png)
 
@@ -176,7 +177,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
   >CADataConnector.search_data("keyword")
   >```
 
-## 8. Run the notebook
+## 9. Run the notebook
 
 When a notebook is executed, what is actually happening is that each code cell in the notebook is executed, in order, from top to bottom.
 
@@ -195,7 +196,7 @@ There are several ways to execute the code cells in your notebook:
 * At a scheduled time.
   * Press the `Schedule` button located in the top right section of your notebook panel. Here you can schedule your notebook to be executed once at some future time, or repeatedly at your specified interval.
 
-## 9. Refine the data
+## 10. Refine the data
 
 The notebook analyzes food insecurity data, and attempts to correlate multiple variables that include public heath, food scarcity, and access to food programs.
 
@@ -240,7 +241,7 @@ Here are a sampling of the variables used in the notebook and their definitions:
 
 Initially, the data is very large and contains irrelevant data. Through a series of explorations, the DataFrame is reduced by eliminating unrelated variables and data where the vales are 0 or undefined.
 
-## 10. Write out data using Cognos Analytics connection
+## 11. Write out data using Cognos Analytics connection
 
 Once we have refined our DataFrame, we can use the connection to write the data back out so that we can visualize it using Cognos Analytics.
 
@@ -252,7 +253,7 @@ Once complete, you should see the file in your Cognos Analytics instance.
 
 ![ca-new-data-file](doc/source/images/ca-new-data-file.png)
 
-## 11. Visualize the data in Cognos Analytics
+## 12. Visualize the data in Cognos Analytics
 
 ## License
 
