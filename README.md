@@ -1,4 +1,12 @@
-# !!! WORK IN PROGRESS
+# Visualize Food Insecurity with Watson Studio and Cognos Analytics
+
+This code pattern showcases the integration between Watson Studio and Cognos Analytics by guiding the user through an examination of data related to a growing problem in the United States, the issue of food insecurites and its associated factors.
+
+Often in data science we do a great deal of work to glean insights that have an impact on society or a subset of it and yet, often, we end up not communicating our findings or communicating them ineffectively to non data science audiences. That's where visualizations become the most powerful. By visualizing our insights and predictions, we, as data scientists and data lovers, can make a real impact and educate those around us that might not have had the same opportunity to work on a project of the same subject. By visualizing our findings and those insights that have the most power to do social good, we can bring awareness and maybe even change. This Code Pattern walks you through how to do just that, with IBM's Watson Studio, Pandas, and Cognos Analytics.
+
+For this particular Code Pattern, the focus is on food insecurity throughout the US. Low access, diet-related diseases, race, poverty, geography and other factors are considered by using open government data. For some context, this problem is a more and more relevant problem for the United States as obesity and diabetes rise and two out of three adult Americans are considered obese, one third of American minors are considered obese, nearly ten percent of Americans have diabetes and nearly fifty percent of the African American population have heart disease. Even more, cardiovascular disease is the leading global cause of death, accounting for 17.3 million deaths per year, and rising. Native American populations more often than not do not have grocery stores on their reservation... and all of these trends are on the rise. The problem lies not only in low access to fresh produce, but food culture, low education on healthy eating as well as racial and income inequality.
+
+The government data that is used in this Code Pattern has been conveniently combined into a dataset for our use, which you can find in this repo under combined_data.csv.zip. You can find the original, government data from the [US Bureau of Labor Statistics](https://www.bls.gov/cex) and [The United States Department of Agriculture](https://www.ers.usda.gov/data-products/food-environment-atlas/data-access-and-documentation-downloads/).
 
 ![architecture](doc/source/images/architecture.png)
 
