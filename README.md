@@ -1,4 +1,6 @@
-# Visualize Food Insecurity with Watson Studio and Cognos Analytics
+!!!! WORK IN PROGRESS
+
+# Visualize Credit Risk with Watson Studio and Cognos Analytics
 
 This code pattern showcases the integration between Watson Studio and Cognos Analytics by guiding the user through an examination of data related to a growing problem in the United States, the issue of food insecurites and its associated factors.
 
