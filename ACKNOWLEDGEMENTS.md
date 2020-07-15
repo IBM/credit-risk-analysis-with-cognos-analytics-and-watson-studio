@@ -1,3 +1,3 @@
 # Acknowledgements
 
-- Credit goes to [Madison Myers](https://github.com/MadisonJMyers) for creating the notebook.
+* Credit goes to [Kas Attanapola](kasun.attanapola@ca.ibm.com) for creating the Cognos Analytics visualizations.

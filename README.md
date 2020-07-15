@@ -1,30 +1,26 @@
-!!!! WORK IN PROGRESS
-
 # Visualize Credit Risk with Watson Studio and Cognos Analytics
 
-This code pattern showcases the integration between Watson Studio and Cognos Analytics by guiding the user through an examination of data related to a growing problem in the United States, the issue of food insecurites and its associated factors.
+This code pattern showcases the integration between Watson Studio and Cognos Analytics by guiding the user through an examination of credit risk related data.
 
-Often in data science we do a great deal of work to glean insights that have an impact on society or a subset of it and yet, often, we end up not communicating our findings or communicating them ineffectively to non data science audiences. That's where visualizations become the most powerful. By visualizing our insights and predictions, we, as data scientists and data lovers, can make a real impact and educate those around us that might not have had the same opportunity to work on a project of the same subject. By visualizing our findings and those insights that have the most power to do social good, we can bring awareness and maybe even change. This Code Pattern walks you through how to do just that, with IBM's Watson Studio, Pandas, and Cognos Analytics.
+The Data Scientist refines the data and builds a model using Watson Machine Learning. The model is then used to score new credit applications to determine if they are a risk or not. The results are then fed into Cognos Analytics, where a Business Analyst can create visualizations to provide insights about the factors that most influence the credit worthiness of the applicants.
 
-For this particular Code Pattern, the focus is on food insecurity throughout the US. Low access, diet-related diseases, race, poverty, geography and other factors are considered by using open government data. For some context, this problem is a more and more relevant problem for the United States as obesity and diabetes rise and two out of three adult Americans are considered obese, one third of American minors are considered obese, nearly ten percent of Americans have diabetes and nearly fifty percent of the African American population have heart disease. Even more, cardiovascular disease is the leading global cause of death, accounting for 17.3 million deaths per year, and rising. Native American populations more often than not do not have grocery stores on their reservation... and all of these trends are on the rise. The problem lies not only in low access to fresh produce, but food culture, low education on healthy eating as well as racial and income inequality.
-
-The government data that is used in this Code Pattern has been conveniently combined into a dataset for our use, which you can find in this repo under combined_data.csv.zip. You can find the original, government data from the [US Bureau of Labor Statistics](https://www.bls.gov/cex) and [The United States Department of Agriculture](https://www.ers.usda.gov/data-products/food-environment-atlas/data-access-and-documentation-downloads/).
+Data is easily transferred between Watson Studio and Cognos Analytics using a feature of Studio called a `Data Connector`. It provides notebooks the ability to read and write data to a Cognos Analytics instance.
 
 ![architecture](doc/source/images/architecture.png)
 
 ## Flow
 
-1. Full data set is loaded into Cognos Analytics.
-1. User runs Jupyter notebook in Watson Studio
-1. Data from Cognos Analytics is loaded into Jupyter notebook.
-1. Jupyter notebook is run to create a refined data set that is pushed back into Cognos Analytics.
-1. User runs Cognos Analytics to visualize new data set.
+1. Credit risk data is loaded into Cognos Analytics.
+1. Data Scientist runs Jupyter notebook in Watson Studio.
+1. Data from Cognos Analytics is loaded into Jupyter notebook where it is prepared/refined for modeling.
+1. Jupyter notebook uses Watson Machine Learning to create a credit risk model.
+1. New credit applications are scored against the model and the results are pushed back into Cognos Analytics.
+1. Business Analyst runs Cognos Analytics to visualize the results.
 
 ## Included Components
 
 * [Cognos Analytics](https://www.ibm.com/products/cognos-analytics): A business intelligence solution that empowers users with AI-infused self-service capabilities that accelerate data preparation, analysis, and repot creation.
 * [IBM Watson Studio](https://dataplatform.cloud.ibm.com): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
-* [IBM Cloud Object Storage](https://cloud.ibm.com/catalog/services/cloud-object-storage): An IBM Cloud service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
 * [Jupyter Notebooks](https://jupyter.org/): An open-source web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
 * [pandas](https://pandas.pydata.org/): A Python library providing high-performance, easy-to-use data structures.
 
@@ -39,7 +35,7 @@ The government data that is used in this Code Pattern has been conveniently comb
 1. [Create the notebook in Watson Studio](#7-create-the-notebook-in-watson-studio)
 1. [Add data to the notebook](#8-add-data-to-the-notebook)
 1. [Run the notebook](#9-run-the-notebook)
-1. [Refine the data](#10-refine-the-data)
+1. [Refine the data and create a data model](#10-refine-the-data-and-create-a-data-model)
 1. [Write out data using Cognos Analytics connection](#11-write-out-data-using-cognos-analytics-connection)
 1. [Visualize the data in Cognos Analytics](#12-visualize-the-data-in-cognos-analytics)
 
@@ -51,13 +47,11 @@ git clone https://github.com/IBM/cognos-analytics-with-watson-studio.git
 
 ## 2. Upload data file into Cognos Analytics
 
-* From the data directory in your local repo, unzip the file `combined_data.csv.zip` to extract the file `combined_data.csv`.
-
 * Log into IBM's [Cognos Analytics](https://www.ibm.com/products/cognos-analytics).
 
 * From the Cognos Analytics main dashboard, select the `+` icon in the lower left corner and select `Upload files`.
 
-* From the file selection dialog, select the extracted csv file. In this example, the file has been loaded into the `cognos-studio-data` folder.
+* From the file selection dialog, select the two `CSV` files located in your local `data` folder. In this example, the files have been uploaded into the `cognos-studio-data` folder in Cognos Analytics.
 
   ![ca-data-file](doc/source/images/ca-data-file.png)
 
@@ -101,7 +95,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
 
 * Click `Select source` to view the available connections.
 
-* From the `Select connection source` panel, select the connection you created in the previous step. Then select the path to the data file on Cognos Analytics.
+* From the `Select connection source` panel, select the connection you created in the previous step. Then select the path to the data files on Cognos Analytics.
 
 ![select-connector-path](doc/source/images/select-connector-path.png)
 
@@ -148,7 +142,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
   * Under `Notebook URL` provide the following url [4]:
 
   ```url
-  https://raw.githubusercontent.com/IBM/cognos-analytics-with-watson-studio/master/notebooks/diet-related-disease.ipynb
+  https://raw.githubusercontent.com/IBM/cognos-analytics-with-watson-studio/master/notebooks/german-credit-risk.ipynb
   ```
 
   ![new-notebook](doc/source/images/new-notebook.png)
@@ -163,7 +157,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
 
   ![start-notebook](doc/source/images/start-notebook.png)
 
-* The second cell of the notebook should be labeled as a `@hidden_cell`. This is where will load in our Cognos Analytics `csv` file.
+* The second cell of the notebook should be labeled as a `@hidden_cell`. This is where we will load in our Cognos Analytics `CSV` file.
 
   >**Note**: This cell is marked as a `@hidden_cell` because it will contain sensitive credentials.
 
@@ -173,13 +167,11 @@ Upon a successful project creation, you are taken to the project Overview tab. T
 
   ![notebook-add-data](doc/source/images/notebook-add-data.png)
 
-* The `@hidden_cell` should now contain the access token and data connector that will allow you to load your Cognos Analytics `csv` file.
-
-* Change the name of the DataFrame variable to `df_data_1`, which is the name used in the remaining notebook cells.
-
-* Change the path and file name to point to your Cognos Analytics data.
+* The `@hidden_cell` should now contain the access token and data connector that will allow you to upload your Cognos Analytics `CSV` file.
 
   ![notebook-data-cell](doc/source/images/notebook-data-cell.png)
+
+* In the next cell, change the path and file name to point to the German credit model data stored in Cognos Analytics.
 
   > **TIP**: To search the data files that your connector points to,  run the following command in the cell:
   >
@@ -206,64 +198,187 @@ There are several ways to execute the code cells in your notebook:
 * At a scheduled time.
   * Press the `Schedule` button located in the top right section of your notebook panel. Here you can schedule your notebook to be executed once at some future time, or repeatedly at your specified interval.
 
-## 10. Refine the data
+## 10. Refine the data and create a data model
 
-The notebook analyzes food insecurity data, and attempts to correlate multiple variables that include public heath, food scarcity, and access to food programs.
+Initially, the German credit risk dataset is very large and contains irrelevant data. Through a series of explorations, the DataFrame is reduced by eliminating unrelated variables and data where the vales are 0 or undefined.
 
-General definitions:
+The notebook also performs some data visualizations to find patterns, detect outliers, understand distribution and more. It uses graphs, such as:
 
-* **Food Insecurity** is a measure of the availability of food and an individuals' ability to access it.
-* **SNAP** refers to the Supplemental Nutrition Assistance Program that was formerly known as food stamps.
-* **WIC** is the Woman, Infant, Children program that provides nutrious foods for expecting mothers, infants and children.
+* Histograms, boxplots, etc. to find distribution / spread of our continuous variables.
+* Bar charts to show frequency in categorical values.
 
-Here are a sampling of the variables used in the notebook and their definitions:
-
-* **PCT_REDUCED_LUNCH10** - Percentage of reduced lunches in schools
-* **PCT_DIABETES_ADULTS10** - Percentage of adult population with diabetes
-* **PCT_OBESE_ADULTS10** - Percentage of adult population that is obese
-* **FOODINSEC_10_12** - Amount of food insecurity
-* **PCT_OBESE_CHILD11** - Percentage of children in the population that is obese
-* **PCT_LACCESS_POP10** - Percentage of the population lacking access to food
-* **PCT_LACCESS_CHILD10** - Percentage of children lacking access to food
-* **PCT_LACCESS_SENIORS10** - Percentage of senior citizens lacking access to food
-* **SNAP_PART_RATE10** - SNAP Participation Rate
-* **PCT_LOCLFARM07**
-* **FMRKT13** - Number of food markets
-* **PCT_FMRKT_SNAP13** - Number of food markets providing SNAP assistance
-* **PCT_FMRKT_WIC13** - Number of food markets providing WIC assistance
-* **FMRKT_FRVEG13** - Food markets with vegetables
-* **PCT_FRMKT_FRVEG13** - Percentage of markets that offer vegatables
-* **PCT_FRMKT_ANMLPROD13** - Percentage of markets that offer animal products
-* **FOODHUB12** - Food hubs connect the dots between producers and cosumers of food in local and regional food systems. Currently there are 236 food hubs in the U.S.
-* **FARM_TO_SCHOOL**
-* **SODATAX_STORES11**
-* **GROC12**
-* **SNAPS12**
-* **WICS12**
-* **PCT_NHWHITE10** - Percentage of the poluation that is white
-* **PCT_NHBLACK10** - Percentage of the poluation that is black
-* **PCT_HISP10** - Percentage of the poluation that is hispanic
-* **PCT_NHASIAN10** - Percentage of the poluation that is asian
-* **PCT_65OLDER10** - Percentage of the poluation that is 65 or older
-* **PCT_18YOUNGER10** - Percentage of the poluation that is 18 or younger
-* **POVRATE10** - Poverty Rate
-* **CHILDPOVRATE10** - Chile Poverty Rate
-
-Initially, the data is very large and contains irrelevant data. Through a series of explorations, the DataFrame is reduced by eliminating unrelated variables and data where the vales are 0 or undefined.
+The notebook concludes by creating a machine learning model. It uses the  insights and intuition gained from the data visualizations to determine what kind of model to create and which features to use. The end result will be a simple classification model.
 
 ## 11. Write out data using Cognos Analytics connection
 
-Once we have refined our DataFrame, we can use the connection to write the data back out so that we can visualize it using Cognos Analytics.
+Once the model is created, we will use it to score a new set of credit applications.
 
-In this example, we are writing it out to a file named `focused_data.csv`.
+First we need to upload the new application data from Cognos Analytics using our data connector.
+
+![notebook-get-new-apps-data](doc/source/images/notebook-get-new-apps-data.png)
+
+> **NOTE**: You will need to change the path and file name to point to the new German credit applications data in Cognos Analytics.
+
+The new applications will be scored using our model, and a new dataframe will be created that contains the result - whether the application is considered a credit risk or not.
+
+Once the new scored dataframe is created, we can use the data connector to write the data back out to Cognos Analytics for further investigation and data visulization.
+
+In this example, we are writing it out to a file named `german_credit_new_apps_scored.csv`.
 
 ![notebook-save-data](doc/source/images/notebook-save-data.png)
 
-Once complete, you should see the file in your Cognos Analytics instance.
+Once complete, you should see the file in the data folder of Cognos Analytics instance.
 
 ![ca-new-data-file](doc/source/images/ca-new-data-file.png)
 
 ## 12. Visualize the data in Cognos Analytics
+
+Log into your Cognos Analytics instance and navigate to your data directory that contains the German credit risk data, including the scored data we generated in the previous step.
+
+### Create a data module
+
+From the Cognos Analytics main dashboard, select the `+` icon in the lower left corner and select `Data module`.
+
+From the file selection dialog, select the two `CSV` files related to new credit applications. In this example, the file names are:
+
+* `german_credit_model_data.csv` - the original data set used to create our scoring model.
+* `german_credit_new_apps_data.csv` - new credit applications that are to be scored.
+* `german_credit_new_apps_scored.csv` - new credit application scores.
+
+  ![ca-create-data-module](doc/source/images/ca-create-data-module.png)
+
+Click `OK`.
+
+From the `Data module` panel, select the `Relationship` tabs.
+
+Right click on either file icon and select the option `Relationship...`.
+
+  ![ca-create-relationship](doc/source/images/ca-create-relationship.png)
+
+From the `Relationship` dialog, select the other file as `Table 2`. Then select the field `CustomerID` in both tables.
+
+Click `Match Selected Columns`, then click `OK`.
+
+  ![ca-complete-relationship](doc/source/images/ca-complete-relationship.png)
+
+Click the `Save` icon in the top menu to save off the `Data module`.
+
+### Create a dashboard
+
+From the Cognos Analytics main dashboard, select the `+` icon in the lower left corner and select `Dashboard`. Accept the default template and click `OK`.
+
+Click `Select a source` to bring up the selction dialog. Select the Data module you just created in the previous step, and click `OK`.
+
+Now you should see a blank canvas to create your dashboard.
+
+  ![db-blank](doc/source/images/db-blank.png)
+
+From the image above:
+
+* [1] The data module currently associated with the dashboard.
+* [2] The resources included in the data module.
+* [3] The dashboard canvas.
+* [4] The tabs defined for the dashboard.
+
+To create your dashboard, you will need to become knowledgeable with the numerous tools available from icons and pop-up menus.
+
+  ![db-tools](doc/source/images/db-tools.png)
+
+From the image above:
+
+* [1] Toggles you between edit and preview mode.
+* [2] Toggles display of the resouces (data objects) in the data module.
+* [3] An example of one of many drop-down menus associated with data objects.
+* [4] Displays the relationship between all of the visual objects on your dashboard. Objects with the same number are related.
+* [5] Toggles full-screen mode on and off.
+* [6] Toggles display of the filter panels.
+* [7] Displays the fields associated with the selected visual object.
+* [8] Displays the properties associated with the selected visual object.
+* [9] Filters that can be applied to dashboard visual objects. The filter can be set for all dashboard tabs (left side), or for the current tab (right side).
+
+The types of visualizations available include the following:
+
+  ![db-widget-set](doc/source/images/db-widget-set.png)
+
+#### Spiral visualization to show main drivers to determine credit risk
+
+Our first visualization we will be a spiral which will rank how important each of the drivers are in determining credit risk.
+
+Select the `PredictedRisk` field in the `german_credit_risk_new_apps_scored` file in the data source list and drag it onto the canvas.
+
+The toolbar at the top of the window is active for the currently selected visualization. For convenience, you can click on `Undock toolbar` to have the toolbar snap next to the selected visualization.
+
+  ![db-undock-toolbar](doc/source/images/db-undock-toolbar.png).
+
+Click on the anchor icon to bring up the toolbar for the visualization. Then click on the `Change visualization` tool. In this particular case, the default visualization choosen for the data type is a `table`. We need to change this to a `spiral`.
+
+  ![db-change-to-spiral](doc/source/images/db-change-to-spiral.png)
+
+From the pop-up menu, click `All visualiztions` to open up the list of available visualizations. Select `spiral`.
+
+  ![db-select-spiral](doc/source/images/db-select-spiral.png)
+
+From the visualization toolbar, click on the `Edit the title` icon, and set the title to `Owns Property and Existing Savings is the best predictor of credit risk`.
+
+  ![db-set-spiral-title](doc/source/images/db-set-spiral-title.png)
+
+Use the box sizing tools to position the box in the upper left-hand corner of the dashboard.
+
+Use the `Expand/Collapse` button in the upper right-hand corner of your visualization to view in expanded or collapse the view in your dashboard canvas.
+
+  ![db-expand-spiral](doc/source/images/db-expand-spiral.png)
+
+As you can see, the `spiral` visualization ranks the drivers that influence the target field - `PredictedRisk`.
+
+  ![db-spiral-complete](doc/source/images/db-spiral-complete.png)
+
+Use the `Fields` tab to change what the visualization is based on, and use the `Properties` tab to modify to look and feel of the visualization.
+
+  ![db-spiral-target-field](doc/source/images/db-spiral-target-field.png)
+
+#### List visualization to show the effect of loan amount and loan length on risk
+
+Next we will show what effect `Loan Amount` and `Loan Duration` have on credit risk.
+
+Click the `Visualizations` icon in the left navigation bar and select the `Line` graph icon and drap it onto the canvas.
+
+With the new visualization selected, click on the `Fields` tab.
+
+Going back to our resource list, from the `german_credit_risk_new_apps_data` file, drag `LoanAmount` to the `x-axis` field, and `LoanDuration` to the `y-axis` field.
+
+From the `german_credit_risk_new_apps_scored` file, drap `PredictedRisk` onto the visualization, which should assign it to the `Color` field.
+
+  ![db-line-chart-fields](doc/source/images/db-line-chart-fields.png)
+
+If desired, you can use the `Change color palatte` option under the `Properties` tab to change the line colors.
+
+  ![db-line-chart-colors](doc/source/images/db-line-chart-colors.png)
+
+As the graph indicates, the higher the loan amount and the longer the length of the loan, the higer the risk.
+
+Change the title of the visualization to `Loan amount and duration vs predicted risk`.
+
+#### Decision Tree visualization
+
+Our last visualization will be to show the associated risk factors related to the original German credit dataset that had an assigned risk value for each applicant.
+
+Select the `Risk` field in the `german_credit_risk_model_data` file in the data source list and drag it onto the canvas.
+
+Change the visualization to a `Decision tree`.
+
+  ![db-decision-tree](doc/source/images/db-decision-tree.png)
+
+As you can see, all possible `Employment` values are expanded to show risk when combined with other factors.
+
+Change the title of the visualization to `Historic risk drivers`.
+
+#### Final dashboard
+
+Here is what the final version of the dashboard should look like:
+
+![db-final](doc/source/images/db-final.png)
+
+Now that you understand `Data Modules` and `Dashboards`, feel free to explore new visualziations using the German credit risk data.
 
 ## License
 
