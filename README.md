@@ -30,14 +30,13 @@ Data is easily transferred between Watson Studio and Cognos Analytics using a fe
 1. [Upload data file into Cognos Analytics](#2-upload-data-file-into-cognos-analytics)
 1. [Create a new Watson Studio project](#3-create-a-new-watson-studio-project)
 1. [Create a Cognos Analytics connection in Watson Studio](#4-create-a-cognos-analytics-connection-in-watson-studio)
-1. [Add Cognos Analytics data asset to Watson Studio project](#5-add-cognos-analytics-data-asset-to-watson-studio-project)
-1. [Create data access token](#6-create-data-access-token)
-1. [Create the notebook in Watson Studio](#7-create-the-notebook-in-watson-studio)
-1. [Add data to the notebook](#8-add-data-to-the-notebook)
-1. [Run the notebook](#9-run-the-notebook)
-1. [Refine the data and create a data model](#10-refine-the-data-and-create-a-data-model)
-1. [Write out data using Cognos Analytics connection](#11-write-out-data-using-cognos-analytics-connection)
-1. [Visualize the data in Cognos Analytics](#12-visualize-the-data-in-cognos-analytics)
+1. [Create data access token](#5-create-data-access-token)
+1. [Create the notebook in Watson Studio](#6-create-the-notebook-in-watson-studio)
+1. [Add data to the notebook](#7-add-data-to-the-notebook)
+1. [Run the notebook](#8-run-the-notebook)
+1. [Refine the data and create a data model](#9-refine-the-data-and-create-a-data-model)
+1. [Write out data using Cognos Analytics connection](#10-write-out-data-using-cognos-analytics-connection)
+1. [Visualize the data in Cognos Analytics](#11-visualize-the-data-in-cognos-analytics)
 
 ## 1. Clone the repo
 
@@ -87,29 +86,9 @@ Upon a successful project creation, you are taken to the project Overview tab. T
 
 * Click the `Create` button.
 
-## 5. Add Cognos Analytics data asset to Watson Studio project
-
-* From you Watson Studio project dashboard, click `Add to project +`, and select the `Connected data` option.
-
-  ![connected-data-option](doc/source/images/connected-data-option.png)
-
-* Click `Select source` to view the available connections.
-
-* From the `Select connection source` panel, select the connection you created in the previous step. Then select the path to the data files on Cognos Analytics.
-
-![select-connector-path](doc/source/images/select-connector-path.png)
-
-* Click `Select` to select the connection source path.
-
-* From the `New connected data asset` panel, name the path and click `Create`.
-
-![add-connected-path](doc/source/images/add-connected-path.png)
-
-* At this point, you should have a `Connection` and a `Folder Asset` in your list of project assets.
-
 ![project-data-assets](doc/source/images/project-data-assets.png)
 
-## 6. Create data access token
+## 5. Create data access token
 
 * From you Watson Studio project dashboard, selected the `Settings` tab.
 
@@ -128,7 +107,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
 
 ![new-token](doc/source/images/new-token.png)
 
-### 7. Create the notebook in Watson Studio
+### 6. Create the notebook in Watson Studio
 
 * From the new project `Overview` tab, click `+ Add to project` on the top right and choose the `Notebook` asset type.
 
@@ -151,7 +130,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
 
   > **TIP:** Your notebook will appear in the `Notebooks` section of the `Assets` tab.
 
-### 8. Add data to the notebook
+### 7. Add data to the notebook
 
 * After creation, the notebook will automatically be loaded into the notebook runtime environment. You can re-run the notebook at any time by clicking on the `pencil` edit icon displayed in right-hand column of the notebook row.
 
@@ -179,7 +158,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
   >CADataConnector.search_data("keyword")
   >```
 
-## 9. Run the notebook
+## 8. Run the notebook
 
 When a notebook is executed, what is actually happening is that each code cell in the notebook is executed, in order, from top to bottom.
 
@@ -198,7 +177,7 @@ There are several ways to execute the code cells in your notebook:
 * At a scheduled time.
   * Press the `Schedule` button located in the top right section of your notebook panel. Here you can schedule your notebook to be executed once at some future time, or repeatedly at your specified interval.
 
-## 10. Refine the data and create a data model
+## 9. Refine the data and create a data model
 
 Initially, the German credit risk dataset is very large and contains irrelevant data. Through a series of explorations, the DataFrame is reduced by eliminating unrelated variables and data where the vales are 0 or undefined.
 
@@ -209,7 +188,7 @@ The notebook also performs some data visualizations to find patterns, detect out
 
 The notebook concludes by creating a machine learning model. It uses the  insights and intuition gained from the data visualizations to determine what kind of model to create and which features to use. The end result will be a simple classification model.
 
-## 11. Write out data using Cognos Analytics connection
+## 10. Write out data using Cognos Analytics connection
 
 Once the model is created, we will use it to score a new set of credit applications.
 
@@ -231,7 +210,7 @@ Once complete, you should see the file in the data folder of Cognos Analytics in
 
 ![ca-new-data-file](doc/source/images/ca-new-data-file.png)
 
-## 12. Visualize the data in Cognos Analytics
+## 11. Visualize the data in Cognos Analytics
 
 Log into your Cognos Analytics instance and navigate to your data directory that contains the German credit risk data, including the scored data we generated in the previous step.
 
