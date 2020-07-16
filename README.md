@@ -1,4 +1,4 @@
-# Cognos Analytics and Watson Studio: Better together - Credit Risk Analysis Tutorial
+# Cognos Analytics and Watson Studio: Better together - Credit Risk Analysis
 
 This code pattern showcases the integration between Watson Studio and Cognos Analytics by guiding the user through an examination of credit risk related data.
 
