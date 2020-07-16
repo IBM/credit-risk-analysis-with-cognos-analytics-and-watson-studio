@@ -1,4 +1,4 @@
-# Visualize Credit Risk with Watson Studio and Cognos Analytics
+# Cognos Analytics and Watson Studio: Better together - Credit Risk Analysis Tutorial
 
 This code pattern showcases the integration between Watson Studio and Cognos Analytics by guiding the user through an examination of credit risk related data.
 
@@ -198,15 +198,15 @@ First we need to upload the new application data from Cognos Analytics using our
 
 > **NOTE**: You will need to change the path and file name to point to the new German credit applications data in Cognos Analytics.
 
-The new applications will be scored using our model, and a new dataframe will be created that contains the result - whether the application is considered a credit risk or not.
+The new applications will be scored using our model, and a new DataFrame will be created that contains the result - whether the application is considered a credit risk or not.
 
-Once the new scored dataframe is created, we can use the data connector to write the data back out to Cognos Analytics for further investigation and data visulization.
+Once the new scored DataFrame is created, we can use the data connector to write the data back out to Cognos Analytics for further investigation and data visulization.
 
 In this example, we are writing it out to a file named `german_credit_new_apps_scored.csv`.
 
 ![notebook-save-data](doc/source/images/notebook-save-data.png)
 
-Once complete, you should see the file in the data folder of Cognos Analytics instance.
+Once complete, you should see the file in the data folder of your Cognos Analytics instance.
 
 ![ca-new-data-file](doc/source/images/ca-new-data-file.png)
 
@@ -218,7 +218,7 @@ Log into your Cognos Analytics instance and navigate to your data directory that
 
 From the Cognos Analytics main dashboard, select the `+` icon in the lower left corner and select `Data module`.
 
-From the file selection dialog, select the two `CSV` files related to new credit applications. In this example, the file names are:
+From the file selection dialog, select the original German credit risk data we used to create the machine learning model, and the two files related to new credit applications. In this example, the file names are:
 
 * `german_credit_model_data.csv` - the original data set used to create our scoring model.
 * `german_credit_new_apps_data.csv` - new credit applications that are to be scored.
@@ -228,7 +228,7 @@ From the file selection dialog, select the two `CSV` files related to new credit
 
 Click `OK`.
 
-From the `Data module` panel, select the `Relationship` tabs.
+From the `Data module` panel, select the `Relationship` tabs. We need to create a link between the `german_credit_new_apps_data.csv` and `german_credit_new_apps_scored.csv` files. The new applications file contains all of the data used to determine risk, and the scored file just contains the result.
 
 Right click on either file icon and select the option `Relationship...`.
 
@@ -240,15 +240,15 @@ Click `Match Selected Columns`, then click `OK`.
 
   ![ca-complete-relationship](doc/source/images/ca-complete-relationship.png)
 
-Click the `Save` icon in the top menu to save off the `Data module`.
+Click the `Save` icon in the top menu to name and save the `Data module`.
 
 ### Create a dashboard
 
 From the Cognos Analytics main dashboard, select the `+` icon in the lower left corner and select `Dashboard`. Accept the default template and click `OK`.
 
-Click `Select a source` to bring up the selction dialog. Select the Data module you just created in the previous step, and click `OK`.
+Click `Select a source` to bring up the selction dialog. Select the `Data module` you just created in the previous step, and click `OK`.
 
-Now you should see a blank canvas to create your dashboard.
+You should then see a blank canvas to create your dashboard.
 
   ![db-blank](doc/source/images/db-blank.png)
 
@@ -303,7 +303,7 @@ From the visualization toolbar, click on the `Edit the title` icon, and set the 
 
 Use the box sizing tools to position the box in the upper left-hand corner of the dashboard.
 
-Use the `Expand/Collapse` button in the upper right-hand corner of your visualization to view in expanded or collapse the view in your dashboard canvas.
+Use the `Expand/Collapse` button in the upper right-hand corner of your visualization to view in expanded mode or to collapse the view in your dashboard canvas.
 
   ![db-expand-spiral](doc/source/images/db-expand-spiral.png)
 
@@ -311,7 +311,7 @@ As you can see, the `spiral` visualization ranks the drivers that influence the 
 
   ![db-spiral-complete](doc/source/images/db-spiral-complete.png)
 
-Use the `Fields` tab to change what the visualization is based on, and use the `Properties` tab to modify to look and feel of the visualization.
+**NOTE**: Use the `Fields` tab to change what the visualization is based on, and use the `Properties` tab to modify the look and feel of the visualization.
 
   ![db-spiral-target-field](doc/source/images/db-spiral-target-field.png)
 
