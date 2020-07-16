@@ -313,7 +313,7 @@ As you can see, the `spiral` visualization ranks the drivers that influence the 
 
 >**NOTE**: Use the `Fields` tab to change what the visualization is based on, and use the `Properties` tab to modify the look and feel of the visualization.
 >
->  ![db-spiral-target-field](doc/source/images/db-spiral-target-field.png)
+> ![db-spiral-target-field](doc/source/images/db-spiral-target-field.png)
 
 #### List visualization to show the effect of loan amount and loan length on risk
 
