@@ -1,10 +1,10 @@
 # Cognos Analytics and Watson Studio: Better together - Credit Risk Analysis
 
-This code pattern showcases the integration between Watson Studio and Cognos Analytics by guiding the user through an examination of credit risk related data.
+Cognos Analytics on Cloud and Watson Studio on Cloud now work better together.  Cognos Analytics users can now connect to the more powerful data science capabilities in Watson Studio: AutoAI, Jupyter Notebooks, and GPUs. With this integration, both data science and business intelligence teams can share a single ecosystem to make the most of their organization's data.
 
-The Data Scientist refines the data and builds a model using Watson Machine Learning. The model is then used to score new credit applications to determine if they are a risk or not. The results are then fed into Cognos Analytics, where a Business Analyst can create visualizations to provide insights about the factors that most influence the credit worthiness of the applicants.
+The integration between the two offerings serves as a bridge to empower data scientists and business analysts to collaborate on the cloud. Data scientists can easily script against governed Cognos data in Watson Studio and share results back into their Cognos ecosystem.
 
-Data is easily transferred between Watson Studio and Cognos Analytics using a feature of Studio called a `Data Connector`. It provides notebooks the ability to read and write data to a Cognos Analytics instance.
+This code pattern showcases this integration by guiding the user through an examination of credit risk related data. The Data Scientist refines the data and builds a model using Watson Studio and Watson Machine Learning. The model is then used to score new credit applications to determine if they are a risk or not. The results are then fed into Cognos Analytics, where a Business Analyst can create visualizations to provide greater insights into the factors that most influence the credit worthiness of the applicants.
 
 ![architecture](doc/source/images/architecture.png)
 
@@ -41,7 +41,7 @@ Data is easily transferred between Watson Studio and Cognos Analytics using a fe
 ## 1. Clone the repo
 
 ```bash
-git clone https://github.com/IBM/cognos-analytics-with-watson-studio.git
+git clone https://github.com/IBM/credit-risk-analysis-with-cognos-analytics-and-watson-studio.git
 ```
 
 ## 2. Upload data file into Cognos Analytics
@@ -121,7 +121,7 @@ Upon a successful project creation, you are taken to the project Overview tab. T
   * Under `Notebook URL` provide the following url [4]:
 
   ```url
-  https://raw.githubusercontent.com/IBM/cognos-analytics-with-watson-studio/master/notebooks/german-credit-risk.ipynb
+  https://raw.githubusercontent.com/IBM/credit-risk-analysis-with-cognos-analytics-and-watson-studio/master/notebooks/german-credit-risk.ipynb
   ```
 
   ![new-notebook](doc/source/images/new-notebook.png)
@@ -311,9 +311,9 @@ As you can see, the `spiral` visualization ranks the drivers that influence the 
 
   ![db-spiral-complete](doc/source/images/db-spiral-complete.png)
 
-**NOTE**: Use the `Fields` tab to change what the visualization is based on, and use the `Properties` tab to modify the look and feel of the visualization.
-
-  ![db-spiral-target-field](doc/source/images/db-spiral-target-field.png)
+>**NOTE**: Use the `Fields` tab to change what the visualization is based on, and use the `Properties` tab to modify the look and feel of the visualization.
+>
+>  ![db-spiral-target-field](doc/source/images/db-spiral-target-field.png)
 
 #### List visualization to show the effect of loan amount and loan length on risk
 
