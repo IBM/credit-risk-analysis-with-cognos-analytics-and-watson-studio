@@ -188,6 +188,8 @@ The notebook also performs some data visualizations to find patterns, detect out
 
 The notebook concludes by creating a machine learning model. It uses the  insights and intuition gained from the data visualizations to determine what kind of model to create and which features to use. The end result will be a simple classification model.
 
+>**NOTE**: An example version of the notebook (shown with output cells) can be found in the `notebooks/with-output` folder of this repo.
+
 ## 10. Write out data using Cognos Analytics connection
 
 Once the model is created, we will use it to score a new set of credit applications.
