@@ -4,7 +4,7 @@ Cognos Analytics on Cloud and Watson Studio on Cloud now work better together.  
 
 The integration between the two offerings serves as a bridge to empower data scientists and business analysts to collaborate on the cloud. Data scientists can easily script against governed Cognos data in Watson Studio and share results back into their Cognos ecosystem.
 
-This code pattern showcases this integration by guiding the user through an examination of credit risk related data. The Data Scientist refines the data and builds a model using Watson Studio and Watson Machine Learning. The model is then used to score new credit applications to determine if they are a risk or not. The results are then fed into Cognos Analytics, where a Business Analyst can create visualizations to provide greater insights into the factors that most influence the credit worthiness of the applicants.
+This code pattern showcases this integration by guiding the user through an examination of credit risk related data. You will refine the data and build a model using Watson Studio and Watson Machine Learning. The model is then used to score new credit applications to determine if they are a risk or not. The results are then fed into Cognos Analytics, where you can create visualizations to provide greater insights into the factors that most influence the credit-worthiness of the applicants.
 
 ![architecture](doc/source/images/architecture.png)
 
